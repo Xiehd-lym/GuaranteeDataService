@@ -74,8 +74,5 @@ public class Product extends BaseEntity {
     @ApiModelProperty(value = "产品图片文件的base64码")
     private Blob productPicture;
 
-    @ApiModelProperty(value = "逻辑删除（0 未删除、1 删除）")
-    private Boolean deleteFlag;
-
 
 }

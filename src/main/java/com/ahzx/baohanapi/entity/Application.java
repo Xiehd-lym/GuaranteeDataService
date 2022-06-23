@@ -50,8 +50,5 @@ public class Application extends BaseEntity {
     @TableField("handlerMobile")
     private String handlerMobile;
 
-    @ApiModelProperty(value = "逻辑删除（0 未删除、1 删除）")
-    private Boolean deleteFlag;
-
 
 }

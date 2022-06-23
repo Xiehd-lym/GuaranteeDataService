@@ -90,8 +90,5 @@ public class Invoice extends BaseEntity {
     @TableField("contactAddress")
     private String contactAddress;
 
-    @ApiModelProperty(value = "逻辑删除（0 未删除、1 删除）")
-    private Boolean deleteFlag;
-
 
 }

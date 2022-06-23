@@ -104,8 +104,5 @@ public class Guarantee extends BaseEntity {
     @ApiModelProperty(value = "理赔结果通知时间，格式:yyyy-MM-dd HH:mm:ss")
     private Date claimsTime;
 
-    @ApiModelProperty(value = "逻辑删除（0 未删除、1 删除）")
-    private Boolean deleteFlag;
-
 
 }
