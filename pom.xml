@@ -121,6 +121,12 @@
             <version>4.12</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-generator</artifactId>
+            <version>3.3.1</version>
+            <scope>test</scope>
+        </dependency>
 
 
     </dependencies>
