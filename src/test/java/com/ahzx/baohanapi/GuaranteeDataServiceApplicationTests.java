@@ -63,7 +63,7 @@ class GuaranteeDataServiceApplicationTests {
         gc.setOutputDir(projectPath + "/src/main/java");
         gc.setAuthor("ahzx");
         gc.setOpen(false); //生成后是否打开资源管理器
-//        gc.setFileOverride(true); //重新生成时文件是否覆盖
+        gc.setFileOverride(true); //重新生成时文件是否覆盖
         gc.setServiceName("%sService");//默认Service接口会使用I开头，去掉首字母I
         gc.setIdType(IdType.ASSIGN_ID); //主键策略 使用雪花算法
         gc.setDateType(DateType.ONLY_DATE);//定义生成的实体类中日期类型使用java.util.Date
@@ -72,18 +72,17 @@ class GuaranteeDataServiceApplicationTests {
 
         // 3、数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:mysql://localhost:3306/" + prefix + "guarantee" + moduleName + "?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=UTF-8&userSSL=false");
+        dsc.setUrl("jdbc:mysql://localhost:3306/" + prefix + "guarantee" + "?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=UTF-8&userSSL=false");
         dsc.setDriverName("com.mysql.cj.jdbc.Driver");
         dsc.setUsername("root");
         dsc.setPassword("root");
         dsc.setDbType(DbType.MYSQL);//数据库类型
         mpg.setDataSource(dsc);
 
-
         // 4、包配置
         PackageConfig pc = new PackageConfig();
         pc.setModuleName(moduleName); //模块名
-        pc.setParent("com.ahzx.baohanapi.service");
+        pc.setParent("com.ahzx");
         pc.setController("controller");
         pc.setEntity("entity");
         pc.setService("service");

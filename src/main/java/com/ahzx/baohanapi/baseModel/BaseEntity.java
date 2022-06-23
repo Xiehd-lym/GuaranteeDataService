@@ -29,6 +29,6 @@ public class BaseEntity {
     @ApiModelProperty(value = "逻辑删除（0 未删除、1 删除）")
     @TableLogic(value = "0", delval = "1")
     @TableField(fill = FieldFill.INSERT)
-    private Integer deleteFlag;
+    private Boolean deleteFlag;
 
 }
