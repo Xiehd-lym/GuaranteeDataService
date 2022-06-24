@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequestWrapper;
 import java.io.*;
 
 /**
- * @Author xiehd
+ * @Author xiehd 通过RequestWrapper进行Request预处理
  * @Date 2022 06 24
  **/
 public class RequestWrapper extends HttpServletRequestWrapper {
@@ -42,7 +42,6 @@ public class RequestWrapper extends HttpServletRequestWrapper {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-
             }
 
             if (bufferedReader!=null){
@@ -52,10 +51,10 @@ public class RequestWrapper extends HttpServletRequestWrapper {
                     e.printStackTrace();
                 }
             }
+
         }
         body = stringBuilder.toString();
     }
-
 
 
     @Override
@@ -91,7 +90,6 @@ public class RequestWrapper extends HttpServletRequestWrapper {
     public BufferedReader getReader(){
         return new BufferedReader(new InputStreamReader(this.getInputStream()));
     }
-
 
     public String getBody(){
         return this.body;
