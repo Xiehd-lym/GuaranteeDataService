@@ -1,6 +1,7 @@
 package com.ahzx.baohanapi.controller;
 
 
+import com.ahzx.baohanapi.common.result.R;
 import com.ahzx.baohanapi.entity.Application;
 import com.ahzx.baohanapi.service.ApplicationService;
 import io.swagger.annotations.Api;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * <p>
@@ -30,7 +33,6 @@ public class ApplicationController {
     @Autowired
     private ApplicationService applicationService;
 
-
     @ApiOperation(value="简单查询",notes="")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "产品id", dataType = "String")
@@ -38,6 +40,17 @@ public class ApplicationController {
     @PostMapping("getById")
     public Application getApplicationById(@RequestParam String id){
         return applicationService.getById(id);
+    }
+
+    /**
+     * 查询所有 不分页
+     * @return
+     */
+    @ApiOperation(value="查询所有",notes="")
+    @PostMapping("list")
+    public R listApplication(){
+        List<Application> list = applicationService.list();
+        return R.ok().data("pageModel",list);
     }
 
 }
