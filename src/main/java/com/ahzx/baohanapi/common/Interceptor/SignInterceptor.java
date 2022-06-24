@@ -48,6 +48,7 @@ public class SignInterceptor implements HandlerInterceptor {
         Object appidKey = jsonMap.get("appid");
         if (Objects.isNull(appidKey)){
             ServletUtil.renderString(response,JSON.toJSONString(Result.error("appid不能为空")));
+            return false;
         }
 
         if (!String.valueOf(appid).equals(appidKey.toString())){
@@ -89,13 +90,13 @@ public class SignInterceptor implements HandlerInterceptor {
         String stringSignTemp = stringA + "&" + appkey + appkey;
 
         log.info("打印参数：{}",stringSignTemp);
-
+//        将签名使用MD5加密，并全部字母变成大写
         String signValue = DigestUtil.md5Hex(stringSignTemp).toUpperCase();
 
         log.info("打印sign:{}",signValue);
 
         if (!signValue.equals(sign)){
-//            ServletUtil.renderString(response,JSON.toJSONString(Result.error("签名错误")));
+            ServletUtil.renderString(response,JSON.toJSONString(Result.error("签名错误")));
             return false;
         }
 
