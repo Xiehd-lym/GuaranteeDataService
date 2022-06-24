@@ -6,3 +6,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     password: root
     username: root
+
+sign:
+  appid: xinbao_prod
+  appkey: 1111111111111111111
