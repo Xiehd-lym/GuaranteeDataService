@@ -3,6 +3,10 @@ package com.ahzx.baohanapi.controller;
 
 import com.ahzx.baohanapi.entity.Application;
 import com.ahzx.baohanapi.service.ApplicationService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author ahzx
  * @since 2022-06-23
  */
+@Api(tags="同步数据模块")
 @RestController
 @RequestMapping("/baohanapi/application")
 public class ApplicationController {
@@ -25,6 +30,11 @@ public class ApplicationController {
     @Autowired
     private ApplicationService applicationService;
 
+
+    @ApiOperation(value="简单查询",notes="")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "产品id", dataType = "String")
+    })
     @PostMapping("getById")
     public Application getApplicationById(@RequestParam String id){
         return applicationService.getById(id);

@@ -33,7 +33,7 @@ public class RequestWrapper extends HttpServletRequestWrapper {
                 stringBuilder.append("");
             }
         } catch (IOException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
         } finally {
 
             if (inputStream!=null){
@@ -54,8 +54,6 @@ public class RequestWrapper extends HttpServletRequestWrapper {
             }
         }
         body = stringBuilder.toString();
-
-
     }
 
 
