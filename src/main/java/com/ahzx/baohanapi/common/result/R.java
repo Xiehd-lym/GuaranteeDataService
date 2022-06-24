@@ -56,7 +56,6 @@ public class R {
     }
 
     public R code(Integer code) {
-//
         this.setCode(code);
         return this;
     }
