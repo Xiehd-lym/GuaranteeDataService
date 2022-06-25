@@ -28,12 +28,4 @@ public class MybatisPlusConfig {
         return interceptor;
     }
 
-    /**
-     * 低版本Springboot分页
-     * @return
-     */
-/*    @Bean
-    PaginationInterceptor paginationInterceptor(){
-        return new PaginationInterceptor();
-    }*/
 }

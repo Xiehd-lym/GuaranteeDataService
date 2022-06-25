@@ -23,7 +23,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry){
         registry.addInterceptor(signInterceptor)
-                .addPathPatterns("/**") //所有请求都需要进行保温签名sign
+                .addPathPatterns("/*") //所有请求都需要进行报文签名sign
                 .excludePathPatterns("/html/*","/js/*");//排除html/js目录
     }
 
