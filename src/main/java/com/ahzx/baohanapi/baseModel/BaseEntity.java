@@ -15,7 +15,7 @@ import java.util.Date;
 @Accessors(chain = true)
 public class BaseEntity {
     @ApiModelProperty(value = "ID")
-    @TableId(value = "id", type = IdType.ASSIGN_ID)
+    @TableId(value = "id", type = IdType.AUTO)
     private String id;
 
     @ApiModelProperty(value = "创建时间")
