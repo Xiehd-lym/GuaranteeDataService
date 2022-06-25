@@ -1,14 +1,13 @@
 package com.ahzx.baohanapi.controller;
 
-
 import com.ahzx.baohanapi.common.result.R;
 import com.ahzx.baohanapi.entity.Application;
+import com.ahzx.baohanapi.entity.query.ApplicationQuery;
 import com.ahzx.baohanapi.service.ApplicationService;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.*;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,6 +24,7 @@ import java.util.List;
 @Api(tags="同步数据模块")
 @RestController
 @RequestMapping("/baohanapi/application")
+@Slf4j
 public class ApplicationController {
 
     @Autowired
@@ -63,19 +63,38 @@ public class ApplicationController {
     @PostMapping("save")
     public R listApplication(@RequestBody Application application){
         boolean save = applicationService.save(application);
-        return R.ok().data("save",save);
+        log.info("save结果:{}",save);
+        return R.ok();
     }
 
     /**
      * 分页查询
      */
-    @PostMapping(value = "pageList")
+    @GetMapping(value = "pageList")
     @ApiOperation(value = "分页查询")
-    public R pageList(@RequestParam Long page ,@RequestParam Long limit){
+    public R pageList(@ApiParam(value = "当前页码", required = true) @PathVariable Long page,
+                      @ApiParam(value = "每页记录数", required = true) @PathVariable Long limit){
         Page<Application> pageParam = new Page<>(page, limit);
-        Page<Application> page1 = applicationService.page(pageParam);
-        return R.ok().data("pageList",page1);
-
+        Page<Application> pageList = applicationService.page(pageParam);
+        return R.ok().data("pageList",pageList);
     }
+
+    /**
+     * 分页条件查询投保信息
+     * @param page
+     * @param limit
+     * @param applicationQuery
+     * @return
+     */
+    @ApiOperation("分页投保申请")
+    @GetMapping("list/{page}/{limit}")
+    public R listPage(@ApiParam(value = "当前页码", required = true) @PathVariable Long page,
+                      @ApiParam(value = "每页记录数", required = true) @PathVariable Long limit,
+                      @ApiParam("讲师列表查询对象") ApplicationQuery applicationQuery){
+
+        IPage<Application> pageModel = applicationService.selectPage(page, limit, applicationQuery);
+        return  R.ok().data("pageModel", pageModel);
+    }
+
 }
 

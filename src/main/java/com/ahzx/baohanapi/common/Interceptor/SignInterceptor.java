@@ -20,7 +20,7 @@ import java.util.Objects;
 import java.util.TreeMap;
 
 /**
- * @Author xiehd
+ * @Author xiehd 拦截器实现类，实现HandlerInterceptor接口
  * @Date 2022 06 24
  **/
 @Component
@@ -35,15 +35,18 @@ public class SignInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        System.out.println(request.getRequestURI());
+        System.out.println("----------------分割线--------------------");
+        log.info("此次请求的URL：{}",request.getRequestURL());
+        log.info("此次请求的URI：{}",request.getRequestURI());
         RequestWrapper requestWrapper = new RequestWrapper(request);
         //获取@RequestBody注解参数和post请求参数
         String body = requestWrapper.getBody();
         //fastjson解析方法
         Map<String,Object> jsonMap = JSON.parseObject(body, TreeMap.class);
+        log.info("解析后打印jsonMap：{}",jsonMap);
 
         if (jsonMap == null){
-            log.info("打印jsonMap：{}",jsonMap);
+            log.info("判空后打印jsonMap：{}",jsonMap);
             ServletUtil.renderString(response,JSON.toJSONString(Result.error("appid不能为空01")));
             return false;
         }
@@ -55,6 +58,8 @@ public class SignInterceptor implements HandlerInterceptor {
         }
 
         if (!String.valueOf(appid).equals(appidKey.toString())){
+            log.info("appidKey:{}",appidKey);
+            log.info("appid:{}",appid);
             ServletUtil.renderString(response,JSON.toJSONString(Result.error("appid错误")));
             return false;
         }
@@ -102,16 +107,19 @@ public class SignInterceptor implements HandlerInterceptor {
         }
 
 //        sign校验无问题，放行
+        log.info("preHandle：handler:{}",handler);
         return true;
     }
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+        log.info("postHandle:modelAndView：{}",modelAndView);
 //        HandlerInterceptor.super.postHandle(request, response, handler, modelAndView);
     }
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
 //        HandlerInterceptor.super.afterCompletion(request, response, handler, ex);
+        log.info("afterCompletion:handler：{}",handler);
     }
 }

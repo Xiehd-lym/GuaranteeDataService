@@ -22,13 +22,21 @@ import org.springframework.stereotype.Service;
 @Service
 public class ApplicationServiceImpl extends ServiceImpl<ApplicationMapper, Application> implements ApplicationService {
 
+    /**
+     *
+     * @param page
+     * @param limit
+     * @param applicationQuery
+     * @return
+     */
     @Override
     public IPage<Application> selectPage(Long page, Long limit, ApplicationQuery applicationQuery) {
         Page<Application> pageParam = new Page<>(page, limit);
 
         QueryWrapper<Application> queryWrapper = new QueryWrapper<>();
 
-        queryWrapper.orderByAsc("sort");
+        //排序字段
+        queryWrapper.orderByAsc("productId");
 
         if (applicationQuery == null){
             return baseMapper.selectPage(pageParam, queryWrapper);
