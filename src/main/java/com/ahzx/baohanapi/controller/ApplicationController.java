@@ -17,11 +17,10 @@ import java.util.List;
  * <p>
  * 投保申请表 前端控制器
  * </p>
- *
+ *  省综合服务平台向中鑫中科发起投保申请，中鑫中科接收申请数据并返回相应跳转地址链接
  * @author ahzx
  * @since 2022-06-23
  */
-@Api(tags="同步数据模块")
 @RestController
 @RequestMapping("/baohanapi/application")
 @Slf4j
@@ -31,35 +30,11 @@ public class ApplicationController {
     private ApplicationService applicationService;
 
     /**
-     * 简单查询
-     * @param id
+     * 2
+     * 省综合服务平台向中鑫中科发起投保申请，中鑫中科接收申请数据并返回相应跳转地址链接
+     * @param application
      * @return
      */
-    @ApiOperation(value="简单查询",notes="")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "产品id", dataType = "String")
-    })
-    @PostMapping("getById")
-    public Application getApplicationById(@RequestParam String id){
-        return applicationService.getById(id);
-    }
-
-    /**
-     * 查询所有 不分页
-     * @return
-     */
-    @ApiOperation(value="查询所有",notes="")
-    @PostMapping("list")
-    public R listApplication(){
-        List<Application> list = applicationService.list();
-        return R.ok().data("pageModel",list);
-    }
-
-    /**
-     * 新增
-     * @return
-     */
-    @ApiOperation(value="新增",notes="")
     @PostMapping("save")
     public R listApplication(@RequestBody Application application){
         boolean result = applicationService.save(application);
@@ -69,40 +44,6 @@ public class ApplicationController {
         } else {
             return R.error().message("添加失败");
         }
-    }
-
-    /**
-     * 分页查询
-     */
-    @PostMapping(value = "pageList/{page}/{limit}")
-    @ApiOperation(value = "分页查询")
-    public R pageList(@ApiParam(value = "当前页码", required = true) @PathVariable Long page,
-                      @ApiParam(value = "每页记录数", required = true) @PathVariable Long limit){
-        Page<Application> pageParam = new Page<>(page, limit);
-        Page<Application> pageList = applicationService.page(pageParam);
-        return R.ok().data("pageList",pageList);
-    }
-
-    /**
-     * 分页条件查询投保信息
-     * @param page
-     * @param limit
-     * @param applicationQuery
-     * @return
-     */
-    @ApiOperation("分页投保申请")
-    @PostMapping("list/{page}/{limit}")
-    public R listPage(@ApiParam(value = "当前页码", required = true) @PathVariable Long page,
-                      @ApiParam(value = "每页记录数", required = true) @PathVariable Long limit,
-                      @ApiParam("讲师列表查询对象") ApplicationQuery applicationQuery){
-        IPage<Application> pageModel = applicationService.selectPage(page, limit, applicationQuery);
-        return  R.ok().data("pageModel", pageModel);
-    }
-
-    @ApiOperation("测试")
-    @GetMapping("/index")
-    public String index(){
-        return  "hello!";
     }
 
 }
