@@ -15,7 +15,7 @@ spring:
     username: root
 
 sign:
-  appid: xinbao_prod
+  appId: xinbaIo_prod
   appkey: 111111111111111
   keySecret: 11
   accessKeyId: 11
