@@ -25,34 +25,27 @@ public class Invoice extends BaseEntity {
     private static final long serialVersionUID=1L;
 
     @ApiModelProperty(value = "中鑫中科订单号")
-    @TableField("orderNo")
     private String orderNo;
 
     @ApiModelProperty(value = "保函编号")
     private String guarantee;
 
     @ApiModelProperty(value = "发票下载地址，专票可不传")
-    @TableField("invoiceUrl")
     private String invoiceUrl;
 
     @ApiModelProperty(value = "发票代码")
-    @TableField("invoiceCode")
     private String invoiceCode;
 
     @ApiModelProperty(value = "发票号码")
-    @TableField("invoiceNo")
     private String invoiceNo;
 
     @ApiModelProperty(value = "是否申请成功 1：审核通过 0：审核不通过")
-    @TableField("applyStatus")
     private Boolean applyStatus;
 
     @ApiModelProperty(value = "投保人名称")
-    @TableField("applicantName")
     private String applicantName;
 
     @ApiModelProperty(value = "投保人统一社会信用代码")
-    @TableField("applicantCode")
     private String applicantCode;
 
     @ApiModelProperty(value = "开票金额，格式：数字格式字符串")
@@ -77,15 +70,12 @@ public class Invoice extends BaseEntity {
     private String email;
 
     @ApiModelProperty(value = "联系电话（收件人联系电话，专票时必填）")
-    @TableField("contactMobile")
     private String contactMobile;
 
     @ApiModelProperty(value = "收件人联系电话姓名，专票时必填")
-    @TableField("contactName")
     private String contactName;
 
     @ApiModelProperty(value = "收件人地址，专票时必填")
-    @TableField("contactAddress")
     private String contactAddress;
 
 

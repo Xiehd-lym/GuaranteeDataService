@@ -25,27 +25,21 @@ public class Application extends BaseEntity {
     private static final long serialVersionUID=1L;
 
     @ApiModelProperty(value = "省综合服务平台产品id标识")
-    @TableField("productId")
     private String productId;
 
     @ApiModelProperty(value = "企业名称")
-    @TableField("companyName")
     private String companyName;
 
     @ApiModelProperty(value = "企业统一社会信用代码")
-    @TableField("companyCreditCode")
     private String companyCreditCode;
 
     @ApiModelProperty(value = "企业地址")
-    @TableField("companyAddress")
     private String companyAddress;
 
     @ApiModelProperty(value = "经办人姓名")
-    @TableField("handlerName")
     private String handlerName;
 
     @ApiModelProperty(value = "经办人手机号")
-    @TableField("handlerMobile")
     private String handlerMobile;
 
 
