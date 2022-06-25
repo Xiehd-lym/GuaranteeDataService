@@ -116,7 +116,7 @@ CREATE TABLE `invoice` (
     `account` varchar(100) default null comment '账号，专票时必填',
     `email` varchar(50) default null comment '接收电子发票的email',
     `contact_mobile` varchar(20) default null comment '联系电话（收件人联系电话，专票时必填）',
-    `contact_name` varchar(50) default null comment '收件人联系电话姓名，专票时必填',
+    `contact_name` varchar(50) default null comment '收件人姓名，专票时必填',
     `contact_address` varchar(500) default null comment '收件人地址，专票时必填',
       `create_time` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',

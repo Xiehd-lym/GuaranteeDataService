@@ -4,8 +4,10 @@ package com.ahzx.baohanapi.controller;
 import com.ahzx.baohanapi.common.result.R;
 import com.ahzx.baohanapi.entity.Invoice;
 import com.ahzx.baohanapi.service.InvoiceService;
+import com.ahzx.baohanapi.vo.InvoiceVo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.logging.Log;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -36,13 +38,13 @@ public class InvoiceController {
      */
     @PostMapping("save")
     public R saveInvoice(@RequestBody Invoice invoice) {
-        boolean result = invoiceService.saveInvoice(invoice);
-        log.info("result结果:{}",result);
-        if (result) {
-            return R.ok().message("添加成功");
-        } else {
-            return R.error().message("添加失败");
-        }
+
+//        Invoice invoice = new Invoice();
+//        BeanUtils.copyProperties(invoiceVo, invoice);
+
+        invoiceService.saveInvoice(invoice);
+
+        return R.ok();
     }
 
     /**

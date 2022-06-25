@@ -1,46 +1,16 @@
-package com.ahzx.baohanapi.entity;
+package com.ahzx.baohanapi.vo;
 
-import com.ahzx.baohanapi.baseModel.BaseEntity;
-import com.baomidou.mybatisplus.annotation.TableField;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.experimental.Accessors;
 
-/**
- * <p>
- * 发票表
- * </p>
- *
- * @author ahzx
- * @since 2022-06-23
- */
 @Data
-@EqualsAndHashCode(callSuper = true)
-@Accessors(chain = true)
-@ApiModel(value="Invoice对象", description="发票表")
-public class Invoice extends BaseEntity {
-
-    private static final long serialVersionUID=1L;
+public class InvoiceVo {
 
     @ApiModelProperty(value = "中鑫中科订单号")
     private String orderNo;
 
     @ApiModelProperty(value = "保函编号")
     private String guarantee;
-
-    @ApiModelProperty(value = "发票下载地址，专票可不传")
-    private String invoiceUrl;
-
-    @ApiModelProperty(value = "发票代码")
-    private String invoiceCode;
-
-    @ApiModelProperty(value = "发票号码")
-    private String invoiceNo;
-
-    @ApiModelProperty(value = "是否申请成功 1：审核通过 0：审核不通过")
-    private Boolean applyStatus;
 
     @ApiModelProperty(value = "投保人名称")
     private String applicantName;
@@ -77,6 +47,5 @@ public class Invoice extends BaseEntity {
 
     @ApiModelProperty(value = "收件人地址，专票时必填")
     private String contactAddress;
-
 
 }

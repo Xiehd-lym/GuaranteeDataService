@@ -8,6 +8,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 
 /**
  * @Author xiehd 拦截器配置类 用于注册拦截器
@@ -23,8 +24,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry){
         registry.addInterceptor(signInterceptor)
-                .addPathPatterns("/*") //所有请求都需要进行报文签名sign
-                .excludePathPatterns("/html/*","/js/*");//排除html/js目录
+                .addPathPatterns("/**") //所有请求都需要进行报文签名sign
+                .excludePathPatterns("/html/*","/js/*","/error");//排除html/js目录
     }
 
 }

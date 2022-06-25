@@ -22,14 +22,22 @@ public class InvoiceServiceImpl extends ServiceImpl<InvoiceMapper, Invoice> impl
     @Autowired
     private InvoiceMapper invoiceMapper;
 
-    /**
-     * 保存发票
-     * @param invoice
-     * @return
-     */
     @Override
-    public boolean saveInvoice(Invoice invoice) {
+    public void saveInvoice(Invoice invoice) {
         invoiceMapper.insert(invoice);
-        return false;
     }
+
+//    @Autowired
+//    private InvoiceMapper invoiceMapper;
+//
+//    /**
+//     * 保存发票
+//     * @param invoice
+//     * @return
+//     */
+//    @Override
+//    public boolean saveInvoice(Invoice invoice) {
+//        invoiceMapper.insert(invoice);
+//        return true;
+//    }
 }

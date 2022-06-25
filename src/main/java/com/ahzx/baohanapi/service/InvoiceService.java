@@ -14,5 +14,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 public interface InvoiceService extends IService<Invoice> {
 
     // 保存发票
-    boolean saveInvoice(Invoice invoice);
+    void saveInvoice(Invoice invoice);
+
 }
