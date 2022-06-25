@@ -8,17 +8,11 @@ spring:
   jackson: #返回json的全局时间格式
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
-#  datasource:
-#    url: jdbc:mysql://localhost:3306/db_zx_guarantee?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=UTF-8&userSSL=false
-#    driver-class-name: com.mysql.cj.jdbc.Driver
-#    password: root
-#    username: root
-#
-#sign:
-#  appId: xinbao_prod
-#  appkey: 111111111111111
-#  keySecret: 11
-#  accessKeyId: 11
+
+# 设置日志级别
+logging:
+  level:
+    root: debug
 
 mybatis-plus:
   configuration:

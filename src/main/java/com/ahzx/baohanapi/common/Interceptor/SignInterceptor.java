@@ -4,6 +4,7 @@ import cn.hutool.crypto.digest.DigestUtil;
 import com.ahzx.baohanapi.common.result.Result;
 import com.ahzx.baohanapi.common.util.ServletUtil;
 import com.alibaba.fastjson.JSON;
+import lombok.extern.log4j.Log4j;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
@@ -34,7 +35,7 @@ public class SignInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        System.out.println("----------------拦截开始--------------------");
+        log.info("----------------拦截开始--------------------");
         if (handler instanceof ResourceHttpRequestHandler){
             log.info("此次请求是为实现ResourceHttpRequestHandler：{}",request.getRequestURL());
             return true;
@@ -47,7 +48,6 @@ public class SignInterceptor implements HandlerInterceptor {
         //fastjson解析方法
         Map<String,Object> jsonMap = JSON.parseObject(body, TreeMap.class);
         log.info("解析后打印jsonMap：{}",jsonMap);
-
         if (jsonMap == null){
             ServletUtil.renderString(response,JSON.toJSONString(Result.error("appid不能为空01")));
             return false;
@@ -97,7 +97,7 @@ public class SignInterceptor implements HandlerInterceptor {
             ServletUtil.renderString(response,JSON.toJSONString(Result.error("签名错误")));
             return false;
         }
-        System.out.println("----------------拦截结束--------------------");
+        log.info("----------------拦截结束--------------------");
 
 //        sign校验无问题，放行
         return true;
