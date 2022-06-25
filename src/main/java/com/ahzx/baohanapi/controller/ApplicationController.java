@@ -96,5 +96,11 @@ public class ApplicationController {
         return  R.ok().data("pageModel", pageModel);
     }
 
+    @ApiOperation("测试")
+    @GetMapping("/index")
+    public String index(){
+        return  "hello!";
+    }
+
 }
 
