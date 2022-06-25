@@ -1,6 +1,14 @@
 package com.ahzx.baohanapi.controller;
 
 
+import com.ahzx.baohanapi.common.result.R;
+import com.ahzx.baohanapi.entity.Invoice;
+import com.ahzx.baohanapi.service.InvoiceService;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.logging.Log;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -16,12 +24,26 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/baohanapi/invoice")
+@Slf4j
 public class InvoiceController {
+
+    @Autowired
+    private InvoiceService invoiceService;
 
     /**
      * 6
      * 省综合服务平台向中鑫中科发起发票申请
      */
+    @PostMapping("save")
+    public R saveInvoice(@RequestBody Invoice invoice) {
+        boolean result = invoiceService.saveInvoice(invoice);
+        log.info("result结果:{}",result);
+        if (result) {
+            return R.ok().message("添加成功");
+        } else {
+            return R.error().message("添加失败");
+        }
+    }
 
     /**
      * 7
