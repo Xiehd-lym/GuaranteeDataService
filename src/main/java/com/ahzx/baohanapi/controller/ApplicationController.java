@@ -4,16 +4,13 @@ package com.ahzx.baohanapi.controller;
 import com.ahzx.baohanapi.common.result.R;
 import com.ahzx.baohanapi.entity.Application;
 import com.ahzx.baohanapi.service.ApplicationService;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -33,6 +30,11 @@ public class ApplicationController {
     @Autowired
     private ApplicationService applicationService;
 
+    /**
+     * 简单查询
+     * @param id
+     * @return
+     */
     @ApiOperation(value="简单查询",notes="")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "产品id", dataType = "String")
@@ -53,5 +55,27 @@ public class ApplicationController {
         return R.ok().data("pageModel",list);
     }
 
+    /**
+     * 新增
+     * @return
+     */
+    @ApiOperation(value="新增",notes="")
+    @PostMapping("save")
+    public R listApplication(@RequestBody Application application){
+        boolean save = applicationService.save(application);
+        return R.ok().data("save",save);
+    }
+
+    /**
+     * 分页查询
+     */
+    @PostMapping(value = "pageList")
+    @ApiOperation(value = "分页查询")
+    public R pageList(@RequestParam Long page ,@RequestParam Long limit){
+        Page<Application> pageParam = new Page<>(page, limit);
+        Page<Application> page1 = applicationService.page(pageParam);
+        return R.ok().data("pageList",page1);
+
+    }
 }
 

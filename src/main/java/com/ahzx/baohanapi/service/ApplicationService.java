@@ -1,6 +1,8 @@
 package com.ahzx.baohanapi.service;
 
 import com.ahzx.baohanapi.entity.Application;
+import com.ahzx.baohanapi.entity.query.ApplicationQuery;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -12,5 +14,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2022-06-23
  */
 public interface ApplicationService extends IService<Application> {
-
+    IPage<Application> selectPage(Long page, Long limit, ApplicationQuery applicationQuery);
 }

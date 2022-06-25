@@ -6,6 +6,7 @@ import com.ahzx.baohanapi.common.util.ServletUtil;
 import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.junit.rules.Timeout;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -13,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
 import java.util.Map;
 import java.util.Objects;
 import java.util.TreeMap;
@@ -33,21 +35,22 @@ public class SignInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-
+        System.out.println(request.getRequestURI());
         RequestWrapper requestWrapper = new RequestWrapper(request);
-
+        //获取@RequestBody注解参数和post请求参数
         String body = requestWrapper.getBody();
-
+        //fastjson解析方法
         Map<String,Object> jsonMap = JSON.parseObject(body, TreeMap.class);
 
         if (jsonMap == null){
-            ServletUtil.renderString(response,JSON.toJSONString(Result.error("appid不能为空")));
+            log.info("打印jsonMap：{}",jsonMap);
+            ServletUtil.renderString(response,JSON.toJSONString(Result.error("appid不能为空01")));
             return false;
         }
 
         Object appidKey = jsonMap.get("appid");
         if (Objects.isNull(appidKey)){
-            ServletUtil.renderString(response,JSON.toJSONString(Result.error("appid不能为空")));
+            ServletUtil.renderString(response,JSON.toJSONString(Result.error("appid不能为空02")));
             return false;
         }
 
@@ -84,10 +87,8 @@ public class SignInterceptor implements HandlerInterceptor {
                 }
             }
         }
-
-
         String stringA = sb.toString().replaceFirst("&", "");
-        String stringSignTemp = stringA + "&" + appkey + appkey;
+        String stringSignTemp = stringA + "&" + "appkey" + appkey;
 
         log.info("打印参数：{}",stringSignTemp);
 //        将签名使用MD5加密，并全部字母变成大写
@@ -100,7 +101,6 @@ public class SignInterceptor implements HandlerInterceptor {
             return false;
         }
 
-//        return HandlerInterceptor.super.preHandle(request, response, handler);
 //        sign校验无问题，放行
         return true;
     }
