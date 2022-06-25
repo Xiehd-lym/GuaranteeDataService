@@ -1,6 +1,5 @@
 package com.ahzx.baohanapi.common.config;
 
-import cn.hutool.http.server.HttpServerRequest;
 import com.ahzx.baohanapi.common.Interceptor.RequestWrapper;
 
 import javax.servlet.*;
@@ -9,10 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 /**
- * @Author xiehd
+ * @Author xiehd 重写过滤器
  * @Date 2022 06 24
  **/
-@WebFilter(urlPatterns = "*/",filterName = "channelFilter")
+@WebFilter(urlPatterns = "/*",filterName = "channelFilter")
 public class ChannelFilter implements Filter {
 
     @Override
@@ -23,7 +22,7 @@ public class ChannelFilter implements Filter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         ServletRequest requestWrapper = null;
-        if (servletRequest instanceof HttpServerRequest)
+        if (servletRequest instanceof HttpServletRequest)
             requestWrapper = new RequestWrapper((HttpServletRequest) servletRequest);
         if (requestWrapper == null){
             filterChain.doFilter(servletRequest,servletResponse);

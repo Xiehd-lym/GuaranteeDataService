@@ -62,15 +62,19 @@ public class ApplicationController {
     @ApiOperation(value="新增",notes="")
     @PostMapping("save")
     public R listApplication(@RequestBody Application application){
-        boolean save = applicationService.save(application);
-        log.info("save结果:{}",save);
-        return R.ok();
+        boolean result = applicationService.save(application);
+        log.info("result结果:{}",result);
+        if (result) {
+            return R.ok().message("添加成功");
+        } else {
+            return R.error().message("添加失败");
+        }
     }
 
     /**
      * 分页查询
      */
-    @GetMapping(value = "pageList")
+    @PostMapping(value = "pageList/{page}/{limit}")
     @ApiOperation(value = "分页查询")
     public R pageList(@ApiParam(value = "当前页码", required = true) @PathVariable Long page,
                       @ApiParam(value = "每页记录数", required = true) @PathVariable Long limit){
@@ -87,11 +91,10 @@ public class ApplicationController {
      * @return
      */
     @ApiOperation("分页投保申请")
-    @GetMapping("list/{page}/{limit}")
+    @PostMapping("list/{page}/{limit}")
     public R listPage(@ApiParam(value = "当前页码", required = true) @PathVariable Long page,
                       @ApiParam(value = "每页记录数", required = true) @PathVariable Long limit,
                       @ApiParam("讲师列表查询对象") ApplicationQuery applicationQuery){
-
         IPage<Application> pageModel = applicationService.selectPage(page, limit, applicationQuery);
         return  R.ok().data("pageModel", pageModel);
     }

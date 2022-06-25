@@ -3,6 +3,7 @@ package com.ahzx.baohanapi.common.config;
 import com.ahzx.baohanapi.common.Interceptor.SignInterceptor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
