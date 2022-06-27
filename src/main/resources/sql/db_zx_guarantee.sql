@@ -23,15 +23,14 @@ CREATE TABLE `application` (
                                `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键id',
                                `product_id` varchar(100) DEFAULT NULL COMMENT '省综合服务平台产品id标识',
                                `company_name` varchar(50) DEFAULT NULL COMMENT '企业名称',
-                               `company_creditCode` varchar(50) DEFAULT NULL COMMENT '企业统一社会信用代码',
+                               `company_credit_code` varchar(50) DEFAULT NULL COMMENT '企业统一社会信用代码',
                                `company_address` varchar(500) DEFAULT NULL COMMENT '企业地址',
                                `handler_name` varchar(50) DEFAULT NULL COMMENT '经办人姓名',
                                `handler_mobile` varchar(20) DEFAULT NULL COMMENT '经办人手机号',
                                `create_time` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
                                `update_time` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-                               `delete_flag` tinyint(1) DEFAULT NULL COMMENT '逻辑删除（0 未删除、1 删除）',
                                PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='投保申请表';
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='投保申请表';
 
 -- ----------------------------
 -- Table structure for guarantee
@@ -68,7 +67,7 @@ CREATE TABLE `guarantee` (
                              `create_time` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
                              `update_time` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
                              PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COMMENT='保函表';
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COMMENT='保函表';
 
 -- ----------------------------
 -- Table structure for invoice
@@ -96,9 +95,8 @@ CREATE TABLE `invoice` (
                            `contact_address` varchar(500) DEFAULT NULL COMMENT '收件人地址，专票时必填',
                            `create_time` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
                            `update_time` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-                           `delete_flag` tinyint(1) DEFAULT NULL COMMENT '逻辑删除（0 未删除、1 删除）',
                            PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='发票表';
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='发票表';
 
 -- ----------------------------
 -- Table structure for product
@@ -125,4 +123,4 @@ CREATE TABLE `product` (
                            `create_time` timestamp NULL DEFAULT NULL COMMENT '创建时间',
                            `update_time` timestamp NULL DEFAULT NULL COMMENT '更新时间',
                            PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1540604186128551939 DEFAULT CHARSET=utf8mb4 COMMENT='产品表';
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COMMENT='产品表';

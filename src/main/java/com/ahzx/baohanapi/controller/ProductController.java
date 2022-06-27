@@ -4,9 +4,12 @@ package com.ahzx.baohanapi.controller;
 import com.ahzx.baohanapi.common.result.R;
 import com.ahzx.baohanapi.entity.Product;
 import com.ahzx.baohanapi.service.ProductService;
+import com.ahzx.baohanapi.vo.ProductVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -40,7 +43,9 @@ public class ProductController {
      */
     @PostMapping("add_product")
     @ApiOperation("同步产品")
-    public R addProduct(@RequestBody Product product){
+    public R addProduct(@RequestBody ProductVo productVo){
+        Product product = new Product();
+        BeanUtils.copyProperties(productVo,product);
         boolean result = productService.save(product);
         log.info("result结果:{}",result);
         if (result) {

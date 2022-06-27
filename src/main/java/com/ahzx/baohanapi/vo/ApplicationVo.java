@@ -18,8 +18,6 @@ public class ApplicationVo {
 
     private String channel;
 
-    private static final long serialVersionUID=1L;
-
     @ApiModelProperty(value = "省综合服务平台产品id标识")
     private String productId;
 

@@ -1,27 +1,23 @@
-package com.ahzx.baohanapi.entity;
+package com.ahzx.baohanapi.vo;
 
-import com.ahzx.baohanapi.baseModel.BaseEntity;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.experimental.Accessors;
+
+import java.sql.Blob;
 
 /**
- * <p>
- * 产品表
- * </p>
- *
- * @author ahzx
- * @since 2022-06-23
- */
+ * @Author xiehd
+ * @Date 2022 06 27
+ **/
 @Data
-@EqualsAndHashCode(callSuper = true)
-@Accessors(chain = true)
-@ApiModel(value="Product对象", description="产品表")
-public class Product extends BaseEntity {
+public class ProductVo {
+    private String appid;
 
-    private static final long serialVersionUID=1L;
+    private String sign;
+
+    private String applyno;
+
+    private String channel;
 
     @ApiModelProperty(value = "省综合服务平台产品id标识")
     private String productId;
@@ -70,6 +66,4 @@ public class Product extends BaseEntity {
 
 //    @ApiModelProperty(value = "产品图片文件的base64码")
 //    private Blob productPicture;
-
-
 }

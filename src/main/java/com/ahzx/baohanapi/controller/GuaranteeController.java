@@ -4,6 +4,9 @@ package com.ahzx.baohanapi.controller;
 import com.ahzx.baohanapi.common.result.R;
 import com.ahzx.baohanapi.entity.Guarantee;
 import com.ahzx.baohanapi.service.GuaranteeService;
+import com.ahzx.baohanapi.vo.GuaranteeVo;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,6 +28,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("/baohanapi/guarantee")
+@Slf4j
 public class GuaranteeController {
 
     @Autowired
@@ -37,9 +41,17 @@ public class GuaranteeController {
      * @return
      */
     @PostMapping("save")
-    public R save(@RequestBody Guarantee guarantee){
-        boolean save = guaranteeService.save(guarantee);
-        return R.ok().data("save",save);
+    public R save(@RequestBody GuaranteeVo guaranteeVo){
+        Guarantee guarantee = new Guarantee();
+        BeanUtils.copyProperties(guaranteeVo,guarantee);
+        log.info("guarantee:{}",guarantee);
+        boolean result = guaranteeService.save(guarantee);
+        log.info("result结果:{}",result);
+        if (result) {
+            return R.ok().message("添加成功");
+        } else {
+            return R.error().message("添加失败");
+        }
     }
 
     /**

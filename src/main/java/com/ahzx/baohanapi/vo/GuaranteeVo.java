@@ -1,31 +1,25 @@
-package com.ahzx.baohanapi.entity;
+package com.ahzx.baohanapi.vo;
 
-import com.ahzx.baohanapi.baseModel.BaseEntity;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.experimental.Accessors;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
 /**
- * <p>
- * 保函表
- * </p>
- *
- * @author ahzx
- * @since 2022-06-23
- */
+ * @Author xiehd
+ * @Date 2022 06 27
+ **/
 @Data
-@EqualsAndHashCode(callSuper = true)
-@Accessors(chain = true)
-@ApiModel(value="Guarantee对象", description="保函表")
-public class Guarantee extends BaseEntity {
+public class GuaranteeVo {
+    private String appid;
 
-    private static final long serialVersionUID=1L;
+    private String sign;
+
+    private String applyno;
+
+    private String channel;
 
     @ApiModelProperty(value = "省综合服务平台产品id标识")
     private Integer productId;
@@ -81,8 +75,6 @@ public class Guarantee extends BaseEntity {
     private String guaranteeFile;
 
     @ApiModelProperty(value = "出函时间，格式:yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GTM-8")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date issueTime;
 
     @ApiModelProperty(value = "退保结果通知时间，格式:yyyy-MM-dd HH:mm:ss")
@@ -112,6 +104,5 @@ public class Guarantee extends BaseEntity {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GTM-8")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date claimsTime;
-
 
 }
