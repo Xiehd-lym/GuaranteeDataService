@@ -1,9 +1,13 @@
 package com.ahzx.baohanapi.common.config;
 
 import com.ahzx.baohanapi.common.Interceptor.SignInterceptor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
+import org.springframework.boot.autoconfigure.web.servlet.DispatcherServletAutoConfiguration;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -26,6 +30,12 @@ public class WebMvcConfig implements WebMvcConfigurer {
         registry.addInterceptor(signInterceptor)
                 .addPathPatterns("/**") //所有请求都需要进行报文签名sign
                 .excludePathPatterns("/html/*","/js/*","/error");//排除html/js目录
+    }
+
+    @Bean
+    @Qualifier(DispatcherServletAutoConfiguration.DEFAULT_DISPATCHER_SERVLET_BEAN_NAME)
+    public DispatcherServlet dispatcherServlet() {
+        return new AxinDispatcherServlet();
     }
 
 }
