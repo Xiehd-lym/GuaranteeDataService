@@ -35,30 +35,22 @@ public class SignInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        log.info("----------------拦截开始--------------------");
-        if (handler instanceof ResourceHttpRequestHandler) {
-            log.info("此次请求是为实现ResourceHttpRequestHandler：{}", request.getRequestURL());
-            return true;
-        }
-        log.info("此次请求的URL：{}", request.getRequestURL());
-        log.info("此次请求的URI：{}", request.getRequestURI());
         RequestWrapper requestWrapper = new RequestWrapper(request);
         //获取@RequestBody注解参数和post请求参数
         String body = requestWrapper.getBody();
         //fastjson解析方法
-        Map<String, Object> jsonMap = JSON.parseObject(body, TreeMap.class);
-        log.info("解析后打印jsonMap：{}", jsonMap);
-        if (jsonMap == null) {
-            ServletUtil.renderString(response, JSON.toJSONString(Result.error("appid不能为空01")));
+        Map<String,Object> jsonMap = JSON.parseObject(body, TreeMap.class);
+        if (jsonMap == null){
+            ServletUtil.renderString(response,JSON.toJSONString(Result.error("appid不能为空01")));
             return false;
         }
         Object appidKey = jsonMap.get("appid");
-        if (Objects.isNull(appidKey)) {
-            ServletUtil.renderString(response, JSON.toJSONString(Result.error("appid不能为空02")));
+        if (Objects.isNull(appidKey)){
+            ServletUtil.renderString(response,JSON.toJSONString(Result.error("appid不能为空02")));
             return false;
         }
-        if (!String.valueOf(appid).equals(appidKey.toString())) {
-            ServletUtil.renderString(response, JSON.toJSONString(Result.error("appid错误")));
+        if (!String.valueOf(appid).equals(appidKey.toString())){
+            ServletUtil.renderString(response,JSON.toJSONString(Result.error("appid错误")));
             return false;
         }
         Object sign = jsonMap.get("sign");
@@ -90,15 +82,11 @@ public class SignInterceptor implements HandlerInterceptor {
         String stringSignTemp = stringA + "&" + "appkey" + appkey;
 //        将签名使用MD5加密，并全部字母变成大写
         String signValue = DigestUtil.md5Hex(stringSignTemp).toUpperCase();
-
-        log.info("打印签名sign:{}", signValue);
-
-        if (!signValue.equals(sign)) {
-            ServletUtil.renderString(response, JSON.toJSONString(Result.error("签名错误")));
+        log.info("打印签名sign:{}",signValue);
+        if (!signValue.equals(sign)){
+            ServletUtil.renderString(response,JSON.toJSONString(Result.error("签名错误")));
             return false;
         }
-        log.info("----------------拦截结束--------------------");
-
 //        sign校验无问题，放行
         return true;
     }

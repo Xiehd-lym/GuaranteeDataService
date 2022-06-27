@@ -2,10 +2,8 @@ package com.ahzx.baohanapi.controller;
 
 
 import com.ahzx.baohanapi.common.result.R;
-import com.ahzx.baohanapi.entity.Application;
 import com.ahzx.baohanapi.entity.Guarantee;
 import com.ahzx.baohanapi.service.GuaranteeService;
-import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,7 +36,6 @@ public class GuaranteeController {
      * 需将用户申请信息同步省综合服务平台
      * @return
      */
-    @ApiOperation(value="新增申请信息",notes="")
     @PostMapping("save")
     public R save(@RequestBody Guarantee guarantee){
         boolean save = guaranteeService.save(guarantee);

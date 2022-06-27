@@ -1,11 +1,13 @@
 package com.ahzx.baohanapi.entity;
 
 import com.ahzx.baohanapi.baseModel.BaseEntity;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -101,6 +103,8 @@ public class Guarantee extends BaseEntity {
     private String applyUserPhone;
 
     @ApiModelProperty(value = "理赔结果通知时间，格式:yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GTM-8")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date claimsTime;
 
 

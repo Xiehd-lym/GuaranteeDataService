@@ -6,6 +6,14 @@ import lombok.Data;
 @Data
 public class InvoiceVo {
 
+    private String appid;
+
+    private String sign;
+
+    private String applyno;
+
+    private String channel;
+
     @ApiModelProperty(value = "中鑫中科订单号")
     private String orderNo;
 

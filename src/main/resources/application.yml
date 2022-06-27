@@ -17,5 +17,5 @@ logging:
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl  #mybatis 日志 sql语句打印
-  mapper-locations: classpath*:com/ahzx/baohanapi/mapper/xml/*.xml
+  mapper-locations: classpath:com/ahzx/baohanapi/mapper/xml/*.xml
   #swagger地址：1 http://localhost:8808/swagger-ui.htm  2 http://localhost:8808/doc.html
