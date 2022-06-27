@@ -19,8 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
  * <p>
  * 发票表 前端控制器
  * </p>
- *  6发票申请
- *  7发票开具通知
+ * 6发票申请
+ * 7发票开具通知
+ *
  * @author ahzx
  * @since 2022-06-23
  */
@@ -37,14 +38,18 @@ public class InvoiceController {
      * 省综合服务平台向中鑫中科发起发票申请
      */
     @PostMapping("save")
-    public R saveInvoice(@RequestBody Invoice invoice) {
+    public R saveInvoice(@RequestBody InvoiceVo invoiceVo) {
 
-//        Invoice invoice = new Invoice();
-//        BeanUtils.copyProperties(invoiceVo, invoice);
+        Invoice invoice = new Invoice();
+        BeanUtils.copyProperties(invoiceVo, invoice);
+        boolean result = invoiceService.save(invoice);
+        log.info("result结果:{}", result);
+        if (result) {
+            return R.ok().message("添加成功");
+        } else {
+            return R.error().message("添加失败");
+        }
 
-        invoiceService.saveInvoice(invoice);
-
-        return R.ok();
     }
 
     /**

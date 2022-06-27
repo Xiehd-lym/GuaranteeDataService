@@ -18,26 +18,4 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class InvoiceServiceImpl extends ServiceImpl<InvoiceMapper, Invoice> implements InvoiceService {
-
-    @Autowired
-    private InvoiceMapper invoiceMapper;
-
-    @Override
-    public void saveInvoice(Invoice invoice) {
-        invoiceMapper.insert(invoice);
-    }
-
-//    @Autowired
-//    private InvoiceMapper invoiceMapper;
-//
-//    /**
-//     * 保存发票
-//     * @param invoice
-//     * @return
-//     */
-//    @Override
-//    public boolean saveInvoice(Invoice invoice) {
-//        invoiceMapper.insert(invoice);
-//        return true;
-//    }
 }
