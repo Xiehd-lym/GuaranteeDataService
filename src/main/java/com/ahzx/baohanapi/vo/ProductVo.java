@@ -11,11 +11,11 @@ import java.sql.Blob;
  **/
 @Data
 public class ProductVo {
-    private String appid;
+    private String appId;
 
     private String sign;
 
-    private String applyno;
+    private String applyNo;
 
     private String channel;
 

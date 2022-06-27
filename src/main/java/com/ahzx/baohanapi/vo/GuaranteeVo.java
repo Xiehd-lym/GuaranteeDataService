@@ -13,11 +13,11 @@ import java.util.Date;
  **/
 @Data
 public class GuaranteeVo {
-    private String appid;
+    private String appId;
 
     private String sign;
 
-    private String applyno;
+    private String applyNo;
 
     private String channel;
 
