@@ -1,6 +1,8 @@
 package com.ahzx.baohanapi.common.util;
 
+import cn.hutool.crypto.SmUtil;
 import cn.hutool.crypto.digest.DigestUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -12,6 +14,7 @@ import java.util.TreeMap;
 import java.util.UUID;
 
 @Component
+@Slf4j
 public class SignUtils {
 
     private static String appId;
@@ -20,7 +23,7 @@ public class SignUtils {
 
     private static String keySecret;
 
-    @Value("${sign.appid}")
+    @Value("${sign.appId}")
     public void setAppid(String appId) {
         this.appId = appId;
     }
@@ -35,25 +38,14 @@ public class SignUtils {
         this.keySecret = keySecret;
     }
 
-    // signature签名生成（SM3加密）
-//    public static String signature() {
-//
-//        SignUtils signUtils = new SignUtils();
-//        String timestamp = signUtils.getTimestamp();
-//
-//        String uuid = UUID.randomUUID().toString().trim().replace("-", "");
-//
-//        String baseString = "accessKeyId=" + accessKeyId + "&appId=" + appId +
-//                "&timestamp=" + timestamp + "&uuid=" + uuid;
-//
-//        return cn.hutool.crypto.SmUtil.sm3(keySecret + baseString);
-//    }
-
     public static Map<String,Object> createSign(Map<String, Object> params) {
         SignUtils signUtils = new SignUtils();
         String timestamp = signUtils.getTimestamp();
-        params.put("appid", appId);
+        String uuid = UUID.randomUUID().toString().trim().replace("-", "");
+        params.put("appId", appId);
         params.put("timestamp",timestamp);
+        params.put("accessKeyId", accessKeyId);
+        params.put("uuid", uuid);
         StringBuilder sb = new StringBuilder();
 
         //将参数以参数名的字典升序排序
@@ -65,11 +57,13 @@ public class SignUtils {
                 sb.append("&").append(key).append("=").append(value);
             }
         }
-        String stringA = sb.toString().replaceFirst("&", "");
-        String stringSignTemp = stringA + "&" + "appKey=" + accessKeyId;
+        String baseString = sb.toString().replaceFirst("&", "");
+        String signStr = keySecret + "&" + "baseString=" + baseString;
 
-        String signValue = DigestUtil.md5Hex(stringSignTemp).toUpperCase();
-        params.put("sign", signValue);
+        // 报文签名使用国密消息摘要算法（SM3）
+        String signature = SmUtil.sm3(signStr).toUpperCase();
+
+        params.put("sign", signature);
         return params;
     }
 

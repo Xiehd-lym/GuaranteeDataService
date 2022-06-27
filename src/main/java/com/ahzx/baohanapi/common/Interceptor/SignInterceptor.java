@@ -1,5 +1,6 @@
 package com.ahzx.baohanapi.common.Interceptor;
 
+import cn.hutool.crypto.SmUtil;
 import cn.hutool.crypto.digest.DigestUtil;
 import com.ahzx.baohanapi.common.result.Result;
 import com.ahzx.baohanapi.common.util.ServletUtil;
@@ -27,11 +28,20 @@ import java.util.TreeMap;
 @Slf4j
 public class SignInterceptor implements HandlerInterceptor {
 
-    @Value("${sign.appid}")
-    private String appid;
+//    @Value("${sign.appid}")
+//    private String appid;
+//
+//    @Value("${sign.appkey}")
+//    private String appkey;
 
-    @Value("${sign.appkey}")
-    private String appkey;
+    @Value("${sign.appId}")
+    private String appId;
+
+    @Value("${sign.accessKeyId}")
+    private String accessKeyId;
+
+    @Value("${sign.keySecret}")
+    private String keySecret;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -39,18 +49,18 @@ public class SignInterceptor implements HandlerInterceptor {
         //获取@RequestBody注解参数和post请求参数
         String body = requestWrapper.getBody();
         //fastjson解析方法
-        Map<String,Object> jsonMap = JSON.parseObject(body, TreeMap.class);
-        if (jsonMap == null){
-            ServletUtil.renderString(response,JSON.toJSONString(Result.error("appid不能为空01")));
+        Map<String, Object> jsonMap = JSON.parseObject(body, TreeMap.class);
+        if (jsonMap == null) {
+            ServletUtil.renderString(response, JSON.toJSONString(Result.error("appId不能为空01")));
             return false;
         }
-        Object appidKey = jsonMap.get("appid");
-        if (Objects.isNull(appidKey)){
-            ServletUtil.renderString(response,JSON.toJSONString(Result.error("appid不能为空02")));
+        Object appIdKey = jsonMap.get("appId");
+        if (Objects.isNull(appIdKey)) {
+            ServletUtil.renderString(response, JSON.toJSONString(Result.error("appId不能为空02")));
             return false;
         }
-        if (!String.valueOf(appid).equals(appidKey.toString())){
-            ServletUtil.renderString(response,JSON.toJSONString(Result.error("appid错误")));
+        if (!String.valueOf(appId).equals(appIdKey.toString())) {
+            ServletUtil.renderString(response, JSON.toJSONString(Result.error("appId错误")));
             return false;
         }
         Object sign = jsonMap.get("sign");
@@ -58,9 +68,9 @@ public class SignInterceptor implements HandlerInterceptor {
             ServletUtil.renderString(response, JSON.toJSONString(Result.error("签名不能为空")));
             return false;
         }
-        Object applyno = jsonMap.get("applyno");
-        if (applyno == null) {
-            ServletUtil.renderString(response, JSON.toJSONString(Result.error("applyno不能为空")));
+        Object applyNo = jsonMap.get("applyNo");
+        if (applyNo == null) {
+            ServletUtil.renderString(response, JSON.toJSONString(Result.error("applyNo不能为空")));
             return false;
         }
         Object channel = jsonMap.get("channel");
@@ -78,13 +88,15 @@ public class SignInterceptor implements HandlerInterceptor {
                 }
             }
         }
-        String stringA = sb.toString().replaceFirst("&", "");
-        String stringSignTemp = stringA + "&" + "appkey" + appkey;
-//        将签名使用MD5加密，并全部字母变成大写
-        String signValue = DigestUtil.md5Hex(stringSignTemp).toUpperCase();
-        log.info("打印签名sign:{}",signValue);
-        if (!signValue.equals(sign)){
-            ServletUtil.renderString(response,JSON.toJSONString(Result.error("签名错误")));
+
+        String baseString = sb.toString().replaceFirst("&", "");
+        String signStr = keySecret + "&" + baseString;
+        // 报文签名使用国密消息摘要算法（SM3）
+        String signature = SmUtil.sm3(signStr).toUpperCase();
+
+        log.info("打印签名sign:{}", signature);
+        if (!signature.equals(sign)) {
+            ServletUtil.renderString(response, JSON.toJSONString(Result.error("签名错误")));
             return false;
         }
 //        sign校验无问题，放行
@@ -100,4 +112,5 @@ public class SignInterceptor implements HandlerInterceptor {
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
 
     }
+
 }

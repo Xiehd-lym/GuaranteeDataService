@@ -9,7 +9,6 @@ spring:
     password: root
 
 sign:
-  appId: baohan_pro
-  appkey: 111111111111111
-  keySecret: 11
-  accessKeyId: 11
+  appId: y02xMJ1c
+  accessKeyId: taRGPE8dPuJT
+  keySecret: O3DvH6R7kv3Jamsrs5kk2L34zNqc6zyw
