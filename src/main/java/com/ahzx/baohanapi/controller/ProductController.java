@@ -30,7 +30,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(tags="同步产品接口")
 @Slf4j
 @RestController
-@RequestMapping("/baohanapi/product")
+@RequestMapping("api/anhui_credit_investigation/insurance")
 public class ProductController {
 
     @Autowired

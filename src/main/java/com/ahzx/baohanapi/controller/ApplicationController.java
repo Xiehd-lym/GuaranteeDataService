@@ -24,7 +24,7 @@ import java.util.List;
  * @since 2022-06-23
  */
 @RestController
-@RequestMapping("/baohanapi/application")
+@RequestMapping("api/anhui_credit_investigation/insurance")
 @Slf4j
 public class ApplicationController {
 
@@ -37,7 +37,7 @@ public class ApplicationController {
      * @param applicationVo
      * @return
      */
-    @PostMapping("save")
+    @PostMapping("apply")
     public R saveApplication(@RequestBody ApplicationVo applicationVo){
         Application application = new Application();
         BeanUtils.copyProperties(applicationVo,application);

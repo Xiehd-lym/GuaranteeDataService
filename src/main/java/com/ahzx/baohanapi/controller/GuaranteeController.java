@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.*;
  * @since 2022-06-23
  */
 @RestController
-@RequestMapping("/baohanapi/guarantee")
+@RequestMapping("api/anhui_credit_investigation/insurance")
 @Slf4j
 public class GuaranteeController {
 

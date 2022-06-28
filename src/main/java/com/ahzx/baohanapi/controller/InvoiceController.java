@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2022-06-23
  */
 @RestController
-@RequestMapping("/baohanapi/invoice")
+@RequestMapping("api/anhui_credit_investigation/insurance")
 @Slf4j
 public class InvoiceController {
 
@@ -37,7 +37,7 @@ public class InvoiceController {
      * 6
      * 省综合服务平台向中鑫中科发起发票申请
      */
-    @PostMapping("save")
+    @PostMapping("invoice")
     public R saveInvoice(@RequestBody InvoiceVo invoiceVo) {
 
         Invoice invoice = new Invoice();
