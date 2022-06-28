@@ -28,21 +28,21 @@ public class R {
 
     public static R ok() {
         R r = new R();
-        r.setSuccess(ResultCodeEum.SUCCESS.getSuccess());
-        r.setCode(ResultCodeEum.SUCCESS.getCode());
-        r.setMessage(ResultCodeEum.SUCCESS.getMessage());
+        r.setSuccess(ResultCodeEnum.SUCCESS.getSuccess());
+        r.setCode(ResultCodeEnum.SUCCESS.getCode());
+        r.setMessage(ResultCodeEnum.SUCCESS.getMessage());
         return r;
     }
 
     public static R error() {
         R r = new R();
-        r.setSuccess(ResultCodeEum.ERROR.getSuccess());
-        r.setCode(ResultCodeEum.ERROR.getCode());
-        r.setMessage(ResultCodeEum.ERROR.getMessage());
+        r.setSuccess(ResultCodeEnum.ERROR.getSuccess());
+        r.setCode(ResultCodeEnum.ERROR.getCode());
+        r.setMessage(ResultCodeEnum.ERROR.getMessage());
         return r;
     }
 
-    public static R setResult(ResultCodeEum resultCodeEum) {
+    public static R setResult(ResultCodeEnum resultCodeEum) {
         R r = new R();
         r.setSuccess(resultCodeEum.getSuccess());
         r.setCode(resultCodeEum.getCode());

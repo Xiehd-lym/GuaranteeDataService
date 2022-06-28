@@ -5,7 +5,7 @@ import lombok.ToString;
 
 @Getter
 @ToString
-public enum ResultCodeEum {
+public enum ResultCodeEnum {
 
     SUCCESS(true,200,"成功"),
     ERROR(false,500,"失败"),
@@ -28,7 +28,7 @@ public enum ResultCodeEum {
     private Integer code;
     private String message;
 
-    ResultCodeEum(Boolean success, Integer code, String message) {
+    ResultCodeEnum(Boolean success, Integer code, String message) {
         this.success = success;
         this.code = code;
         this.message = message;

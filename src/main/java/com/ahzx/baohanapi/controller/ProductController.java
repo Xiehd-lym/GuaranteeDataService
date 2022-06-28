@@ -47,6 +47,7 @@ public class ProductController {
         Product product = new Product();
         BeanUtils.copyProperties(productVo,product);
         boolean result = productService.save(product);
+//        todo:产品图片的存储[base64]
         log.info("result结果:{}",result);
         if (result) {
             return R.ok().message("添加成功");
