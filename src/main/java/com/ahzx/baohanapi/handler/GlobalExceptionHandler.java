@@ -34,4 +34,11 @@ public class GlobalExceptionHandler {
         e.printStackTrace();
         return R.setResult(ResultCodeEnum.JSON_PARSE_ERROR);
     }
+
+    @ExceptionHandler(ArithmeticException.class)
+    @ResponseBody
+    public R error(ArithmeticException e){
+        e.printStackTrace();
+        return R.setResult(ResultCodeEnum.ARITHMETIC_ERROR);
+    }
 }

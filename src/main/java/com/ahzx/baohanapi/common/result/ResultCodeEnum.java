@@ -15,10 +15,15 @@ public enum ResultCodeEnum {
     BAD_SQL_GRAMMAR(false,21001,"sql语法错误"),
     JSON_PARSE_ERROR(false,21002,"json解析异常"),
     PARAM_ERROR(false,21003,"参数不正确"),
+    FILE_UPLOAD_ERROR(false, 21004, "文件上传错误"),
+    FILE_DELETE_ERROR(false, 21005, "文件刪除错误"),
+    EXCEL_DATA_IMPORT_ERROR(false, 21006, "Excel数据导入错误"),
+    PARAM_MISSING(false,21007,"参数缺失"),
 
     URL_ENCODE_ERROR(false,22001,"URL编码失败"),
     ILLEGAL_CALLBACK_REQUEST_ERROR(false,22002,"非法回调请求"),
     FETCH_USERINFO_ERROR(false,22003,"获取用户信息失败"),
+    ARITHMETIC_ERROR(false,22004,"算术运算异常"),
 
     GATEWAY_ERROR(false,23001,"服务不能访问"),
     PHONE_ERROR(false,23002,"手机号不正确"),
