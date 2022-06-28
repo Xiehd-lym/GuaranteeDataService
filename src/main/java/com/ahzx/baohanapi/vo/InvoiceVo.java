@@ -56,4 +56,16 @@ public class InvoiceVo {
     @ApiModelProperty(value = "收件人地址，专票时必填")
     private String contactAddress;
 
+    @ApiModelProperty(value = "发票下载地址，专票可不传")
+    private String invoiceUrl;
+
+    @ApiModelProperty(value = "发票代码")
+    private String invoiceCode;
+
+    @ApiModelProperty(value = "发票号码")
+    private String invoiceNo;
+
+    @ApiModelProperty(value = "是否申请成功 1：审核通过 0：审核不通过")
+    private Boolean applyStatus;
+
 }
