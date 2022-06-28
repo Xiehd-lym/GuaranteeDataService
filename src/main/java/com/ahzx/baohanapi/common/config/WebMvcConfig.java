@@ -6,13 +6,11 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplicat
 import org.springframework.boot.autoconfigure.web.servlet.DispatcherServletAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 
 /**
  * @Author xiehd 拦截器配置类 用于注册拦截器
@@ -35,7 +33,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Bean
     @Qualifier(DispatcherServletAutoConfiguration.DEFAULT_DISPATCHER_SERVLET_BEAN_NAME)
     public DispatcherServlet dispatcherServlet() {
-        return new AxinDispatcherServlet();
+        return new BhDispatcherServlet();
     }
 
 }
