@@ -38,8 +38,8 @@ CREATE TABLE `application` (
 DROP TABLE IF EXISTS `guarantee`;
 CREATE TABLE `guarantee` (
                              `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键ID',
-                             `product_id` int(11) DEFAULT NULL COMMENT '省综合服务平台产品id标识',
-                             `order_no` int(11) DEFAULT NULL COMMENT '中鑫中科订单号',
+                             `product_id` varchar(100) DEFAULT NULL COMMENT '省综合服务平台产品id标识',
+                             `order_no` varchar(100) DEFAULT NULL COMMENT '中鑫中科订单号',
                              `company_name` varchar(255) DEFAULT NULL COMMENT '企业名称',
                              `project_name` varchar(255) DEFAULT NULL COMMENT '项目名称',
                              `project_area` varchar(255) DEFAULT NULL COMMENT '项目属地行政区域代码',
@@ -104,7 +104,7 @@ CREATE TABLE `invoice` (
 DROP TABLE IF EXISTS `product`;
 CREATE TABLE `product` (
                            `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键ID',
-                           `product_id` varchar(64) DEFAULT NULL COMMENT '省综合服务平台产品id标识',
+                           `product_id` varchar(100) DEFAULT NULL COMMENT '省综合服务平台产品id标识',
                            `product_name` varchar(300) DEFAULT NULL COMMENT '产品名称',
                            `product_status` char(2) DEFAULT NULL COMMENT '产品状态（1：正常，0：下架）',
                            `product_type` varchar(2) DEFAULT NULL COMMENT '金融产品类型',

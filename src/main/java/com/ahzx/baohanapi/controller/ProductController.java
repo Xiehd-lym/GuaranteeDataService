@@ -8,6 +8,7 @@ import com.ahzx.baohanapi.vo.ProductVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -44,6 +45,10 @@ public class ProductController {
     public R addProduct(@RequestBody ProductVo productVo){
         Product product = new Product();
         BeanUtils.copyProperties(productVo,product);
+        String productId = productVo.getProductId();
+        if (StringUtils.isBlank(productId)){
+            return R.error().code(21007).message("参数缺失");
+        }
         boolean result = productService.save(product);
 //        todo:产品图片的存储[base64]
         log.info("result结果:{}",result);

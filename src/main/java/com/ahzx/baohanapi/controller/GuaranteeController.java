@@ -1,10 +1,13 @@
 package com.ahzx.baohanapi.controller;
 
 
+import cn.hutool.core.date.DateTime;
 import com.ahzx.baohanapi.common.result.R;
 import com.ahzx.baohanapi.entity.Guarantee;
 import com.ahzx.baohanapi.service.GuaranteeService;
 import com.ahzx.baohanapi.vo.GuaranteeVo;
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,13 +43,13 @@ public class GuaranteeController {
      * 需将用户申请信息同步省综合服务平台
      * @return
      */
-    @PostMapping("save")
-    public R save(@RequestBody GuaranteeVo guaranteeVo){
+    @PostMapping("application_result")
+    public R applicationResult(@RequestBody GuaranteeVo guaranteeVo){
         Guarantee guarantee = new Guarantee();
         BeanUtils.copyProperties(guaranteeVo,guarantee);
-        log.info("guarantee:{}",guarantee);
+        DateTime dateTime = new DateTime();
+        guarantee.setInsureTime(dateTime);
         boolean result = guaranteeService.save(guarantee);
-        log.info("result结果:{}",result);
         if (result) {
             return R.ok().message("添加成功");
         } else {
@@ -59,6 +62,20 @@ public class GuaranteeController {
      * 金融机构把审核结果通知中鑫中科之后，
      * 中鑫中科将审核结果同步给省综合服务平台
      */
+    @PostMapping("audit_result")
+    public R auditResult(@RequestBody GuaranteeVo guaranteeVo){
+        Guarantee guarantee = new Guarantee();
+        BeanUtils.copyProperties(guaranteeVo,guarantee);
+        Integer orderNo = guarantee.getOrderNo();
+        UpdateWrapper<Guarantee> guaranteeUpdateWrapper = new UpdateWrapper<>();
+        guaranteeUpdateWrapper.eq("orderNo",orderNo);
+        boolean result = guaranteeService.saveOrUpdate(guarantee, guaranteeUpdateWrapper);
+        if (result) {
+            return R.ok().message("添加成功");
+        } else {
+            return R.error().message("添加失败");
+        }
+    }
 
 
     /**

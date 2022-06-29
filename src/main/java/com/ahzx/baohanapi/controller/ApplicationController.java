@@ -42,7 +42,6 @@ public class ApplicationController {
         Application application = new Application();
         BeanUtils.copyProperties(applicationVo,application);
         boolean result = applicationService.save(application);
-        log.info("result结果:{}",result);
         if (result) {
             return R.ok().message("添加成功");
         } else {
